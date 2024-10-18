@@ -19,39 +19,45 @@ int main() {
     double speed, time, distance;
     int option;
 
-    printf("Escolha uma opção:\n");
-    printf("1. Calcular distância percorrida\n");
-    printf("2. Calcular tempo necessário\n");
-    printf("3. Calcular velocidade necessária\n");
-    printf("Opção: ");
-    scanf("%d", &option);
+    do {
+        printf("Escolha uma opção:\n");
+        printf("1. Calcular distância percorrida\n");
+        printf("2. Calcular tempo necessário\n");
+        printf("3. Calcular velocidade necessária\n");
+        printf("4. Sair\n");
+        printf("Opção: ");
+        scanf("%d", &option);
 
-    switch (option) {
-        case 1:
-            printf("Informe a velocidade (km/h): ");
-            scanf("%lf", &speed);
-            printf("Informe o tempo (minutos): ");
-            scanf("%lf", &time);
-            calculate_distance(speed, time);
-            break;
-        case 2:
-            printf("Informe a velocidade (km/h): ");
-            scanf("%lf", &speed);
-            printf("Informe a distância (km): ");
-            scanf("%lf", &distance);
-            calculate_time(speed, distance);
-            break;
-        case 3:
-            printf("Informe a distância (km): ");
-            scanf("%lf", &distance);
-            printf("Informe o tempo (minutos): ");
-            scanf("%lf", &time);
-            calculate_speed(distance, time);
-            break;
-        default:
-            printf("Opção inválida.\n");
-            break;
-    }
+        switch (option) {
+            case 1:
+                printf("Informe a velocidade (km/h): ");
+                scanf("%lf", &speed);
+                printf("Informe o tempo (minutos): ");
+                scanf("%lf", &time);
+                calculate_distance(speed, time);
+                break;
+            case 2:
+                printf("Informe a velocidade (km/h): ");
+                scanf("%lf", &speed);
+                printf("Informe a distância (km): ");
+                scanf("%lf", &distance);
+                calculate_time(speed, distance);
+                break;
+            case 3:
+                printf("Informe a distância (km): ");
+                scanf("%lf", &distance);
+                printf("Informe o tempo (minutos): ");
+                scanf("%lf", &time);
+                calculate_speed(distance, time);
+                break;
+            case 4:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opção inválida.\n");
+                break;
+        }
+    } while (option != 4);
 
     return 0;
 }
