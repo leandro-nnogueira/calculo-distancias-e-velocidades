@@ -23,7 +23,6 @@
  */
 
 #include <stdio.h>
-
 #include <stdlib.h>
 
 // Função para calcular a distância percorrida com base na velocidade e no tempo
