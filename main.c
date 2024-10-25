@@ -24,6 +24,8 @@
 
 #include <stdio.h>
 
+#include <stdlib.h>
+
 // Função para calcular a distância percorrida com base na velocidade e no tempo
 void calculate_distance(double speed, double time) {
     double distance = (speed * time) / 60.0; // Calcula a distância em km
@@ -43,8 +45,15 @@ void calculate_speed(double distance, double time) {
 }
 
 int main() {
-    double speed, time, distance; // Declaração das variáveis para velocidade, tempo e distância
+    double *speed = (double *)malloc(sizeof(double)); // Aloca memória para a variável de velocidade
+    double *time = (double *)malloc(sizeof(double)); // Aloca memória para a variável de tempo
+    double *distance = (double *)malloc(sizeof(double)); // Aloca memória para a variável de distância
     int option; // Declaração da variável para armazenar a opção do usuário
+
+    if (speed == NULL || time == NULL || distance == NULL) {
+        printf("Erro ao alocar memória.\n");
+        return 1; // Retorna 1 para indicar que houve um erro
+    }
 
     do {
         // Exibe o menu de opções para o usuário
@@ -60,26 +69,26 @@ int main() {
             case 1:
                 // Opção para calcular a distância percorrida
                 printf("Informe a velocidade (km/h): ");
-                scanf("%lf", &speed); // Lê a velocidade fornecida pelo usuário
+                scanf("%lf", speed); // Lê a velocidade fornecida pelo usuário
                 printf("Informe o tempo (minutos): ");
-                scanf("%lf", &time); // Lê o tempo fornecido pelo usuário
-                calculate_distance(speed, time); // Chama a função para calcular a distância
+                scanf("%lf", time); // Lê o tempo fornecido pelo usuário
+                calculate_distance(*speed, *time); // Chama a função para calcular a distância
                 break;
             case 2:
                 // Opção para calcular o tempo necessário
                 printf("Informe a velocidade (km/h): ");
-                scanf("%lf", &speed); // Lê a velocidade fornecida pelo usuário
+                scanf("%lf", speed); // Lê a velocidade fornecida pelo usuário
                 printf("Informe a distância (km): ");
-                scanf("%lf", &distance); // Lê a distância fornecida pelo usuário
-                calculate_time(speed, distance); // Chama a função para calcular o tempo
+                scanf("%lf", distance); // Lê a distância fornecida pelo usuário
+                calculate_time(*speed, *distance); // Chama a função para calcular o tempo
                 break;
             case 3:
                 // Opção para calcular a velocidade necessária
                 printf("Informe a distância (km): ");
-                scanf("%lf", &distance); // Lê a distância fornecida pelo usuário
+                scanf("%lf", distance); // Lê a distância fornecida pelo usuário
                 printf("Informe o tempo (minutos): ");
-                scanf("%lf", &time); // Lê o tempo fornecido pelo usuário
-                calculate_speed(distance, time); // Chama a função para calcular a velocidade
+                scanf("%lf", time); // Lê o tempo fornecido pelo usuário
+                calculate_speed(*distance, *time); // Chama a função para calcular a velocidade
                 break;
             case 4:
                 // Opção para sair do programa
@@ -91,6 +100,10 @@ int main() {
                 break;
         }
     } while (option != 4); // Repete o loop até que o usuário escolha a opção de sair
+
+    free(speed); // Libera a memória alocada para a variável de velocidade
+    free(time); // Libera a memória alocada para a variável de tempo
+    free(distance); // Libera a memória alocada para a variável de distância
 
     return 0; // Retorna 0 para indicar que o programa terminou com sucesso
 }
